@@ -209,7 +209,7 @@ msgstr "%a %k.%M"
 #. The character between %R and %S is U+2236 RATIO
 #: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R∶%S"
-msgstr "%k.%m.%S"
+msgstr "%k.%M.%S"
 
 #: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
