@@ -22,6 +22,8 @@ active_watch_func (GnomeIdleMonitor *monitor,
 		   device_id,
 		   id);
 	g_object_unref (device);
+
+	g_object_set_data (G_OBJECT (monitor), "active-watch-id", GINT_TO_POINTER (0));
 }
 
 static void
@@ -30,6 +32,10 @@ ensure_active_watch (GnomeIdleMonitor *monitor)
 	GdkDevice *device;
 	guint watch_id;
 	int device_id;
+
+	watch_id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (monitor), "active-watch-id"));
+	if (watch_id > 0)
+	  return;
 
 	g_object_get (monitor, "device", &device, NULL);
 	device_id = gdk_x11_device_get_id (device);
@@ -41,6 +47,8 @@ ensure_active_watch (GnomeIdleMonitor *monitor)
 		   watch_id,
 		   gdk_device_get_name (device),
 		   device_id);
+
+	g_object_set_data (G_OBJECT (monitor), "active-watch-id", GINT_TO_POINTER (watch_id));
 }
 
 static void
